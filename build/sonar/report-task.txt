@@ -1,6 +1,0 @@
-projectKey=PowerPlant
-serverUrl=http://localhost:9000
-serverVersion=10.2.1.78527
-dashboardUrl=http://localhost:9000/dashboard?id=PowerPlant
-ceTaskId=AZbi0Yh6AZJIB7eVmRwd
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AZbi0Yh6AZJIB7eVmRwd
