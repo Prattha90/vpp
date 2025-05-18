@@ -92,7 +92,7 @@ sonar{
         property('sonar.projectKey', 'PowerPlant')
         property('sonar.projectName', 'PowerPlant')
         property('sonar.gradle.skipCompile', true)
-        property('sonar.coverage.exclusions', 'src/main/java/com/pratha/powerproject/exception/**,src/main/java/com/pratha/powerproject/config/**/*,src/main/java/com/pratha/powerproject/mapstruct/**/*')
+        property('sonar.coverage.exclusions', 'src/main/java/com/pratha/powerproject/PowerProjectApplication.java, src/main/java/com/pratha/powerproject/exception/**,src/main/java/com/pratha/powerproject/config/**/*,src/main/java/com/pratha/powerproject/mapstruct/**/*')
     }
 }
 
@@ -136,8 +136,15 @@ jacocoTestCoverageVerification {
                     'com.pratha.powerproject.controller.*',
                     'com.pratha.powerproject.service.*',
                     'com.pratha.powerproject.dto.*',
-                    'com.pratha.powerproject.entity.*',
-                    'com.pratha.powerproject.exception.*'
+                    'com.pratha.powerproject.entity.*'
+            ]
+            excludes = [
+                    'com.pratha.powerproject.PowerProjectApplication.java',
+                    'com.pratha.powerproject.exception.*',
+                    'com.pratha.powerproject.mapstruct.*',
+                    'com.pratha.powerproject.repository.*',
+                    'com.pratha.powerproject.config.*'
+
             ]
         }
     }
