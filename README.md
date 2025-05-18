@@ -39,7 +39,7 @@ Before consuming the service, please ensure you have the following prerequisites
 Clone the repository (In your terminal application):
 
    ```shell
-   git clone https://github.com/Pratha-Me/power-plant-assessment
+   git clone https://github.com/Prattha90/vpp.git
    ```
 
 Once the project has been cloned. You can just navigate yourself to the root directory of the project. From the root
@@ -162,7 +162,7 @@ your browser.**
 The APIs are hosted here, http://localhost:8080/power-plant/api-docs. From this link,
 
 1. You can import the APIs in to Http client like Postman.
-2. [Click here](http://localhost:8080/power-plant/api-docs) to obtain the JSON format for import source in Postman
+2. Obtain the JSON format for import source in Postman [from here](http://localhost:8080/power-plant/api-docs).
 
 Follow
 the [official postman documentation](https://learning.postman.com/docs/designing-and-developing-your-api/importing-an-api/#import-an-api-definition)
