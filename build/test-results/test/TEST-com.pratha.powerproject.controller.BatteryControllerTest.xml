@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.pratha.powerproject.controller.BatteryControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-05-18T09:43:53" hostname="Prathas-MacBook-Pro.local" time="1.454">
+  <properties/>
+  <testcase name="whenValidParameter_thenReturnBatteryStatisticObject_withCorrectFieldTypeAndValue()" classname="com.pratha.powerproject.controller.BatteryControllerTest" time="1.149"/>
+  <testcase name="whenValidParameter_thenHttpStatus200()" classname="com.pratha.powerproject.controller.BatteryControllerTest" time="0.021"/>
+  <testcase name="whenValidInput_thenHttpStatus201()" classname="com.pratha.powerproject.controller.BatteryControllerTest" time="0.236"/>
+  <testcase name="whenExpectedResponse_thenReturnListOfSavedBatteryDtoObject()" classname="com.pratha.powerproject.controller.BatteryControllerTest" time="0.04"/>
+  <system-out><![CDATA[15:28:49.487 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.pratha.powerproject.controller.BatteryControllerTest]: BatteryControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:28:49.768 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.pratha.powerproject.PowerProjectApplication for test class com.pratha.powerproject.controller.BatteryControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.5)
+
+2025-05-18T15:28:50.399+05:45  INFO 14446 --- [    Test worker] c.p.p.controller.BatteryControllerTest   : Starting BatteryControllerTest using Java 17.0.7 with PID 14446 (started by pratha in /Users/pratha/PrathaItems/proshore/vpp)
+2025-05-18T15:28:50.406+05:45  INFO 14446 --- [    Test worker] c.p.p.controller.BatteryControllerTest   : The following 1 profile is active: "development"
+2025-05-18T15:28:53.676+05:45  INFO 14446 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-05-18T15:28:53.677+05:45  INFO 14446 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-05-18T15:28:53.681+05:45  INFO 14446 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-05-18T15:28:53.749+05:45  INFO 14446 --- [    Test worker] c.p.p.controller.BatteryControllerTest   : Started BatteryControllerTest in 3.833 seconds (process running for 5.609)
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /battery/postcode/range
+       Parameters = {minPostCode=[10038], maxPostCode=[71192]}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.pratha.powerproject.controller.BatteryController
+           Method = com.pratha.powerproject.controller.BatteryController#getBatteriesByCriteria(Optional)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"names":["Tesla Battery","Great High"],"totalCapacity":215,"averageCapacity":107}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /battery/postcode/range
+       Parameters = {minPostCode=[10038], maxPostCode=[71192]}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.pratha.powerproject.controller.BatteryController
+           Method = com.pratha.powerproject.controller.BatteryController#getBatteriesByCriteria(Optional)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"names":["Tesla Battery","Great High"],"totalCapacity":215,"averageCapacity":107}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /battery/all
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"136"]
+             Body = [{"id":null,"name":"Tesla Battery","postcode":"71192","capacity":100},{"id":null,"name":"Great High","postcode":"10038","capacity":115}]
+    Session Attrs = {}
+
+Handler:
+             Type = com.pratha.powerproject.controller.BatteryController
+           Method = com.pratha.powerproject.controller.BatteryController#saveBatteries(List)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = [{"id":1,"name":"Tesla Battery","postcode":"71192","capacity":100},{"id":2,"name":"Great High","postcode":"10038","capacity":115}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /battery/all
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"136"]
+             Body = [{"id":null,"name":"Tesla Battery","postcode":"71192","capacity":100},{"id":null,"name":"Great High","postcode":"10038","capacity":115}]
+    Session Attrs = {}
+
+Handler:
+             Type = com.pratha.powerproject.controller.BatteryController
+           Method = com.pratha.powerproject.controller.BatteryController#saveBatteries(List)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = [{"id":1,"name":"Tesla Battery","postcode":"71192","capacity":100},{"id":2,"name":"Great High","postcode":"10038","capacity":115}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

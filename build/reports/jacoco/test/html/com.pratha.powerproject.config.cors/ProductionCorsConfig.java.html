@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductionCorsConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vpp</a> &gt; <a href="index.source.html" class="el_package">com.pratha.powerproject.config.cors</a> &gt; <span class="el_source">ProductionCorsConfig.java</span></div><h1>ProductionCorsConfig.java</h1><pre class="source lang-java linenums">package com.pratha.powerproject.config.cors;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+/**
+ * @author Pramosh Shrestha
+ * @created 01/11/2023: 17:26
+ */
+@Configuration
+@Profile(value = &quot;production&quot;)
+<span class="nc" id="L19">public class ProductionCorsConfig {</span>
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+<span class="nc" id="L23">        CorsConfiguration configuration = new CorsConfiguration();</span>
+
+<span class="nc" id="L25">        configuration.setAllowedOrigins(Collections.singletonList(&quot;http://example.com&quot;));</span>
+<span class="nc" id="L26">        configuration.setAllowedMethods(Arrays.asList(&quot;GET&quot;, &quot;POST&quot;, &quot;OPTIONS&quot;, &quot;DELETE&quot;, &quot;PUT&quot;));</span>
+<span class="nc" id="L27">        configuration.setAllowedHeaders(Arrays.asList(&quot;X-Requested-With&quot;, &quot;Origin&quot;, &quot;Content-Type&quot;, &quot;Accept&quot;, &quot;Authorization&quot;));</span>
+<span class="nc" id="L28">        configuration.setExposedHeaders(Arrays.asList(&quot;Authorization&quot;, &quot;X-Token&quot;));</span>
+<span class="nc" id="L29">        configuration.setAllowCredentials(true);</span>
+
+<span class="nc" id="L31">        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();</span>
+<span class="nc" id="L32">        source.registerCorsConfiguration(&quot;/**&quot;, configuration);</span>
+
+<span class="nc" id="L34">        return source;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

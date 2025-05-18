@@ -1,0 +1,145 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id "org.sonarqube" version "4.4.1.3373"
+    id 'org.springframework.boot' version '3.1.5'
+    id 'io.spring.dependency-management' version '1.1.3'
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+// Start: (Plugin-java)
+// Disable build jar for root project
+apply plugin: 'java'
+
+jar {
+    enabled = false
+}
+
+build {
+    enabled = false
+}
+// End: (Plugin-java)
+
+ext {
+    setProperty('springbootDependencyVersion', "2.6.7")
+    setProperty('mapstructVersion', "1.5.3.Final")
+}
+
+group = 'com.pratha'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+
+    testImplementation {
+        /* Exclude: Bundled Junit 4 */
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.2'
+
+//    Start: OpenAPI 3.0
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
+//    End: OpenAPI 3.0
+
+//  Start: Persistence dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.flywaydb:flyway-core'
+//  End: Persistence dependencies
+
+//	Start: Lombok and Mapstruct
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    implementation group: 'org.projectlombok', name: 'lombok-mapstruct-binding', version: '0.2.0'
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+//	End: Lombok and Mapstruct
+
+//  Start: Spring Test Framework
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.8.2'
+//  End: Spring Test Framework
+
+//        Dependency Management for Cloud and Spring Boot - Did not work -> dependencyManagement {}
+//        Problem posted on -> https://stackoverflow.com/questions/53619890/how-to-use-a-maven-bom-for-spring-in-gradle
+//        Solution by -> https://stackoverflow.com/a/73280115
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:${springbootDependencyVersion}"))
+}
+
+sonar{
+    properties {
+        property('sonar.host.url', 'http://localhost:9000')
+        property('sonar.projectKey', 'PowerPlant')
+        property('sonar.projectName', 'PowerPlant')
+        property('sonar.gradle.skipCompile', true)
+        property('sonar.coverage.exclusions', 'src/main/java/com/pratha/powerproject/exception/**,src/main/java/com/pratha/powerproject/config/**/*,src/main/java/com/pratha/powerproject/mapstruct/**/*')
+    }
+}
+
+check {
+    dependsOn jacocoTestCoverageVerification
+}
+
+tasks['sonar'].dependsOn("jacocoTestReport")
+
+// Start: Testing Configuration
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = '0.8.9'
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    reports {
+        xml.required = true
+        csv.required = true
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true
+            element = 'CLASS'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.7 // As per the standard set by the assessment. The coverage should be 70%
+            }
+            includes = [
+                    'com.pratha.powerproject.controller.*',
+                    'com.pratha.powerproject.service.*',
+                    'com.pratha.powerproject.dto.*',
+                    'com.pratha.powerproject.entity.*',
+                    'com.pratha.powerproject.exception.*'
+            ]
+        }
+    }
+}
+// End: Testing Configuration

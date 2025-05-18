@@ -1,0 +1,51 @@
+version: "3.8"
+name: powerplant-web-services
+
+services:
+  powerplant-api:
+    build: ./
+    image: powerplant-api-img
+    container_name: powerplant-api
+    restart: on-failure
+    env_file: ./.env
+    depends_on:
+      - postgresdb
+      - sonar
+    ports:
+      - "8080:8080"
+
+  postgresdb:
+    image: postgres:15-alpine3.17
+    container_name: postgres-db
+    restart: no
+    environment:
+      - POSTGRES_USER=${DOCKER_POSTGRESDB_USER}
+      - POSTGRES_PASSWORD=${DOCKER_POSTGRESDB_ROOT_PASSWORD}
+      - POSTGRES_DB=${DOCKER_POSTGRESDB_DATABASE}
+    ports:
+      - "5432:5432"
+
+  sonar:
+    image: sonarqube:10.2.1-community
+    container_name: sonar-qube
+    restart: no
+    env_file: ./.env
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgresdb
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgresdb:5432/${DOCKER_POSTGRESDB_DATABASE}
+      - SONARQUBE_JDBC_USERNAME=${DOCKER_POSTGRESDB_USER}
+      - SONARQUBE_JDBC_PASSWORD=${DOCKER_POSTGRESDB_ROOT_PASSWORD}
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_temp:/opt/sonarqube/temp
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_temp:
